@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   decrement,
@@ -7,7 +7,6 @@ import {
   incrementAsync,
   selectCount,
 } from './counterSlice'
-import styles from './Counter.module.css'
 
 export function Counter() {
   const count = useSelector(selectCount)
@@ -16,35 +15,16 @@ export function Counter() {
 
   return (
     <div>
-      <div className={styles.row}>
-        <button
-          className={styles.button}
-          aria-label='Increment value'
-          onClick={() => dispatch(increment())}
-          children='+' />
-        <span className={styles.value}>{count}</span>
-        <button
-          className={styles.button}
-          aria-label='Decrement value'
-          onClick={() => dispatch(decrement())}
-          children='-' />
+      <div>
+        <button onClick={() => dispatch(increment())} children='+' />
+        <span>{count}</span>
+        <button onClick={() => dispatch(decrement())} children='-' />
       </div>
-      <div className={styles.row}>
-        <input
-          className={styles.textbox}
-          aria-label='Set increment amount'
-          value={incrementAmount}
-          onChange={e => setIncrementAmount(e.target.value)}
-        />
-        <button
-          className={styles.button}
-          onClick={() => dispatch(incrementByAmount(Number(incrementAmount) || 0))}
-          children='Add Amount' />
-        <button
-          className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync(Number(incrementAmount) || 0))}
-          children='Add Async' />
+      <div>
+        <input value={incrementAmount} onChange={e => setIncrementAmount(e.target.value)} />
+        <button onClick={() => dispatch(incrementByAmount(Number(incrementAmount) || 0))} children='Add Amount' />
+        <button onClick={() => dispatch(incrementAsync(Number(incrementAmount) || 0))} children='Add Async' />
       </div>
-    </div >
+    </div>
   )
 }

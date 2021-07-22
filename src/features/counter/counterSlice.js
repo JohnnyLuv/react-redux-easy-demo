@@ -6,11 +6,10 @@ export const counterSlice = createSlice({
     value: 0,
   },
   reducers: {
+    // Redux Toolkit 允许我们在 reducer 中编写 "mutating" 逻辑
+    // 它实际上并不改变状态，因为它使用 Immer 库
+    // 它检测到 "draft state" 的变化，并基于这些变化产生一个全新的不可变状态
     increment: state => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
       state.value += 1
     },
     decrement: state => {
@@ -24,19 +23,19 @@ export const counterSlice = createSlice({
 
 export const { increment, decrement, incrementByAmount } = counterSlice.actions
 
-// The function below is called a thunk and allows us to perform async logic. It
-// can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
-// will call the thunk with the `dispatch` function as the first argument. Async
-// code can then be executed and other actions can be dispatched
+// 下面的函数被称为 thunk，它允许我们执行异步逻辑
+// 它可以像常规动作一样分派: `dispatch(incrementAsync(10))`
+// 这将以 `dispatch` 函数作为第一个参数调用 thunk
+// 然后可以执行异步代码，并分派其他操作
 export const incrementAsync = amount => dispatch => {
   setTimeout(() => {
     dispatch(incrementByAmount(amount))
   }, 1000)
 }
 
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state) => state.counter.value)`
+// 下面的函数被称为选择器，它允许我们从状态中选择一个值
+// 选择器也可以在使用它们的地方内联定义，而不是在 slice 文件中
+// 例如: `useSelector((state) => state.counter.value)`
 export const selectCount = state => state.counter.value
 
 export default counterSlice.reducer
