@@ -9,21 +9,21 @@ export const counterSlice = createSlice({
     // Redux Toolkit 允许我们在 reducer 中编写 "mutating" 逻辑
     // 它实际上并不改变状态，因为它使用 Immer 库
     // 它检测到 "draft state" 的变化，并基于这些变化产生一个全新的不可变状态
-    increment: state => {
-      state.value += 1
-    },
     decrement: state => {
       state.value -= 1
     },
+    increment: state => {
+      state.value += 1
+    },
     incrementByAmount: (state, action) => {
-      state.value += action.payload
+      state.value += Number(action.payload)
     },
   },
 })
 
 export const { increment, decrement, incrementByAmount } = counterSlice.actions
 
-// 下面的函数被称为 thunk，它允许我们执行异步逻辑
+// 下面的函数被称为 thunk ，它允许我们执行异步逻辑
 // 它可以像常规动作一样分派: `dispatch(incrementAsync(10))`
 // 这将以 `dispatch` 函数作为第一个参数调用 thunk
 // 然后可以执行异步代码，并分派其他操作
